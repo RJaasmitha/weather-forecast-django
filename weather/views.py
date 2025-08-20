@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import WeatherRecord
 import plotly.express as px
 import plotly.offline as opy
+import os
 
 def home(request):
     weather_data = None
@@ -10,7 +11,7 @@ def home(request):
 
     if request.method == "POST":
         city = request.POST.get("city")
-        api_key = "5641ac560f6c3cf4dd18e498bc7ba948"
+        API_KEY = os.getenv("e716bc0d511d6b98bf5ab5eca3882bf6")
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
         response = requests.get(url).json()
 
