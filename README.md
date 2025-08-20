@@ -27,6 +27,14 @@ MySQL (configured as database)
 Plotly (for charts & graphs)
 
 HTML, CSS, Bootstrap/Tailwind for frontend
+## 📸 Screenshots
+
+### Home Page  
+![Home Page](screenshots/home_page.png)
+
+### Weather Chart  
+![Chart](screenshots/chart.png)
+
 
 ⚙️ Installation & Setup
 
