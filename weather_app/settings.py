@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import pymysql
 pymysql.install_as_MySQLdb()
-from dotenv import load_dotenv
-load_dotenv()
 
 
 

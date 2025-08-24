@@ -20,5 +20,6 @@ from weather.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name="home"),  # default home page
+    path('', home, name="home"),
+    # default home page
 ]

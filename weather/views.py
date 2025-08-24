@@ -1,9 +1,14 @@
 import requests
+from django.http import HttpResponse
 from django.shortcuts import render
 from .models import WeatherRecord
 import plotly.express as px
 import plotly.offline as opy
 import os
+from dotenv import load_dotenv   # ✅ NEW
+
+# Load environment variables
+load_dotenv()
 
 def home(request):
     weather_data = None
@@ -11,9 +16,12 @@ def home(request):
 
     if request.method == "POST":
         city = request.POST.get("city")
-        API_KEY = os.getenv("e716bc0d511d6b98bf5ab5eca3882bf6")
+        api_key = os.getenv("API_KEY") # ✅ fetch from .env
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
         response = requests.get(url).json()
+        print("API Key:", api_key)
+        print("City from form:", city)
+        print("API Response:", response)
 
         if response.get("cod") == 200:  # success
             weather_data = {
@@ -44,9 +52,13 @@ def home(request):
             "Humidity": [h.humidity for h in history],
         }
 
-        fig = px.line(x=df["City"], y=df["Temperature"], markers=True,
-                      labels={"x": "City", "y": "Temperature (°C)"},
-                      title="Temperature Trend (Last Searches)")
+        fig = px.line(
+            x=df["City"],
+            y=df["Temperature"],
+            markers=True,
+            labels={"x": "City", "y": "Temperature (°C)"},
+            title="Temperature Trend (Last Searches)"
+        )
         chart_div = opy.plot(fig, auto_open=False, output_type='div')
 
     return render(request, "weather/home.html", {
